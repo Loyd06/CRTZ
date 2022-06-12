@@ -10,4 +10,16 @@ class VisiteurManager extends MainManager {
         $req->closeCursor();
         return$datas;
     }
+
+    public function getLastArticles($off, $lim) {
+        $req = "SELECT * FROM article ORDER BY created_at DESC LIMIT :off, :lim";
+        $stmt = $this->getBdd()->prepare($req);
+        $stmt->bindValue(":off",$off,PDO::PARAM_INT);
+        $stmt->bindValue(":lim",$lim,PDO::PARAM_INT);
+        $stmt->execute();
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $resultat;
+    }
 }
+
