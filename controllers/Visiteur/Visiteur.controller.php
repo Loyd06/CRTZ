@@ -10,12 +10,13 @@ class VisiteurController extends MainController{
     }
   
     public function accueil(){
-        //$utilisateurs = $this->visiteurManager->getUtilisateurs();
-        
+        $offset = 0;
+        $limit = 15;
+        $articles = $this->visiteurManager->getLastArticles($offset, $limit);
         $data_page = [
-            "page_description" => "Description de la page d'accueil",
-            "page_title" => "Titre de la page d'accueil",
-            //"utilisateurs" => $utilisateurs,
+            "page_description" => "Les articles les plus récents",
+            "page_title" => "Les articles les plus récents",
+            "articles" => $articles,
             "view" => "views/Visiteur/accueil.view.php",
             "template" => "views/common/template.php"
         ];
